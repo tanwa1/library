@@ -1,6 +1,14 @@
-const appendContainer = document.getElementById("libraryContainer");
-const tableLists = document.getElementById("tableLists");
+const dialog = document.querySelector("dialog");
+const addBook = document.getElementById("addbook");
+const closeButton = document.querySelector("dialog button");
 
+const cardContainer = document.getElementById("cardContainer");
+
+// const title = document.getElementById("title");
+// const author = document.getElementById("author");
+// const pages = document.getElementById("pages");
+// const readStatus = document.getElementById("Readstatus");
+// const bookId = document.getElementById("bookId");
 
 const myLibrary = [];
 
@@ -13,36 +21,55 @@ function Book(title, author, pages, readStatus, id) {
 
 }
 
-function addBookToLibrary(title, author, pages, readStatus) {
+function addBookToLibrary(titles, author, pages, readStatus) {
 
-    const book = new Book(title, author, pages, readStatus, crypto.randomUUID());
+    const book = new Book(titles, author, pages, readStatus, crypto.randomUUID());
 
     myLibrary.push(book)
 }
 
-addBookToLibrary('romance of three kingdoms', 'luo guanzhong', 600, 'read');
-addBookToLibrary('80,000 Hours', 'Chris Pratt', 150, 'not read');
-addBookToLibrary('Java Practical Programming', 'Perry Xiao', 400, 'not read');
-addBookToLibrary('Bible', 'Prophets', 600, 'not read');
 
 
 function loopLibrary() {
-
+cardContainer.innerHTML = '';
     for (let i = 0; i < myLibrary.length; i++) {
-        
+
         const dataBook = ['title', 'author', 'pages', 'readStatus', 'id'];
-    
-        const tableRows = document.createElement('tr');
-        
+
+        const card = document.createElement('div');
+
         dataBook.forEach((element) => {
-            const tableData = document.createElement('td')
-            
-            tableData.textContent = myLibrary[i][element];
-            tableRows.appendChild(tableData);
-            tableLists.appendChild(tableRows);
-            
+            const cardContent = document.createElement('div')
+
+            cardContent.textContent = myLibrary[i][element];
+            card.appendChild(cardContent);
+            cardContainer.appendChild(card);
         });
     }
 }
 
-loopLibrary();
+// loopLibrary();
+
+addBook.addEventListener("click", () => {
+    dialog.showModal();
+});
+
+// "Close" button closes the dialog
+closeButton.addEventListener("click", () => {
+    dialog.close();
+});
+
+
+const submitButton = document.getElementById("submitButton");
+
+submitButton.addEventListener("click", (e) => {
+
+    const getTitle = document.getElementById("titleName").value;
+    const getAuthor = document.getElementById("authorName").value;
+    const getPage = document.getElementById("numberAmount").value;
+    const readStatus = document.querySelector('input[name="readStatus"]:checked').value;
+
+    addBookToLibrary(getTitle, getAuthor, getPage, readStatus);
+    loopLibrary();
+    e.preventDefault();
+})
