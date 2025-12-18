@@ -4,6 +4,14 @@ const closeButton = document.querySelector("dialog button");
 
 const cardContainer = document.getElementById("cardContainer");
 
+//   width: 20%;
+//   height: 50%;
+//   margin: 1rem;
+//   padding: 1rem;
+//   border-radius: 1rem;
+//   gap: 5rem;
+//   background-color: antiquewhite;
+
 // const title = document.getElementById("title");
 // const author = document.getElementById("author");
 // const pages = document.getElementById("pages");
@@ -31,12 +39,17 @@ function addBookToLibrary(titles, author, pages, readStatus) {
 
 
 function loopLibrary() {
-cardContainer.innerHTML = '';
+    cardContainer.innerHTML = '';
     for (let i = 0; i < myLibrary.length; i++) {
 
         const dataBook = ['title', 'author', 'pages', 'readStatus', 'id'];
 
         const card = document.createElement('div');
+        card.style.width = '20%';
+        card.style.margin = '1rem';
+        card.style.padding = '1rem';
+        card.style.borderRadius = '1rem';
+        card.style.backgroundColor = 'antiquewhite';
 
         dataBook.forEach((element) => {
             const cardContent = document.createElement('div')
