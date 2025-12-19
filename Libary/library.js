@@ -1,22 +1,8 @@
 const dialog = document.querySelector("dialog");
 const addBook = document.getElementById("addbook");
-const closeButton = document.querySelector("dialog button");
+const closeButton = document.getElementById("closeButton");
 
 const cardContainer = document.getElementById("cardContainer");
-
-//   width: 20%;
-//   height: 50%;
-//   margin: 1rem;
-//   padding: 1rem;
-//   border-radius: 1rem;
-//   gap: 5rem;
-//   background-color: antiquewhite;
-
-// const title = document.getElementById("title");
-// const author = document.getElementById("author");
-// const pages = document.getElementById("pages");
-// const readStatus = document.getElementById("Readstatus");
-// const bookId = document.getElementById("bookId");
 
 const myLibrary = [];
 
@@ -42,7 +28,14 @@ function loopLibrary() {
     cardContainer.innerHTML = '';
     for (let i = 0; i < myLibrary.length; i++) {
 
-        const dataBook = ['title', 'author', 'pages', 'readStatus', 'id'];
+        const dataBook = [
+            { label: 'Title: ', key: 'title' },
+            { label: 'Author: ', key: 'author' },
+            { label: 'Pages: ', key: 'pages' },
+            { label: 'Read Status: ', key: 'readStatus' },
+            { label: 'ID: ', key: 'id' }
+
+        ];
 
         const card = document.createElement('div');
         card.style.width = '20%';
@@ -51,17 +44,33 @@ function loopLibrary() {
         card.style.borderRadius = '1rem';
         card.style.backgroundColor = 'antiquewhite';
 
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove Book';
+        removeButton.style.marginTop = '1rem';
+        removeButton.setAttribute('data-id', myLibrary[i].id);
+        
+        removeButton.addEventListener('click', () => { 
+            const bookId = removeButton.getAttribute('data-id');
+            const bookIndex = myLibrary.findIndex(book => book.id === bookId);
+            myLibrary.splice(bookIndex, 1);
+            loopLibrary();
+        }
+);
+        
+
+
         dataBook.forEach((element) => {
             const cardContent = document.createElement('div')
 
-            cardContent.textContent = myLibrary[i][element];
+            cardContent.textContent = element.label + myLibrary[i][element.key];
             card.appendChild(cardContent);
             cardContainer.appendChild(card);
+            card.appendChild(removeButton);    
         });
     }
 }
 
-// loopLibrary();
+
 
 addBook.addEventListener("click", () => {
     dialog.showModal();
