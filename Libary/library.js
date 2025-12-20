@@ -48,25 +48,54 @@ function loopLibrary() {
         removeButton.textContent = 'Remove Book';
         removeButton.style.marginTop = '1rem';
         removeButton.setAttribute('data-id', myLibrary[i].id);
-        
-        removeButton.addEventListener('click', () => { 
+
+        removeButton.addEventListener('click', () => {
             const bookId = removeButton.getAttribute('data-id');
             const bookIndex = myLibrary.findIndex(book => book.id === bookId);
             myLibrary.splice(bookIndex, 1);
             loopLibrary();
         }
-);
-        
+        );
+
+        const toggleButton = document.createElement('button');
+        toggleButton.textContent = 'Toggle Read Status';
+        toggleButton.style.marginTop = '1rem';
+        toggleButton.style.marginLeft = '1rem';
+        toggleButton.setAttribute('data-id', myLibrary[i].id);
+
+        toggleButton.addEventListener('click', () => {
+            const bookId = toggleButton.getAttribute('data-id');
+            const bookIndex = myLibrary.findIndex(book => book.id === bookId);
+            myLibrary[bookIndex].toggleReadStatus();
+            loopLibrary();
+        });
 
 
         dataBook.forEach((element) => {
             const cardContent = document.createElement('div')
-
             cardContent.textContent = element.label + myLibrary[i][element.key];
+            
+            if (myLibrary[i].readStatus === 'Read'){
+                card.style.backgroundColor = 'lightgreen';
+            }
+            else {
+                card.style.backgroundColor = 'red';
+            }
+            
             card.appendChild(cardContent);
             cardContainer.appendChild(card);
-            card.appendChild(removeButton);    
+            card.appendChild(removeButton);
+            card.appendChild(toggleButton);
         });
+    }
+}
+
+Book.prototype.toggleReadStatus = function () {
+    if (this.readStatus === 'Read') {
+        this.readStatus = 'Not Read';
+    }
+    else {
+        this.readStatus = 'Read';
     }
 }
 
@@ -86,12 +115,15 @@ const submitButton = document.getElementById("submitButton");
 
 submitButton.addEventListener("click", (e) => {
 
+
     const getTitle = document.getElementById("titleName").value;
     const getAuthor = document.getElementById("authorName").value;
     const getPage = document.getElementById("numberAmount").value;
     const readStatus = document.querySelector('input[name="readStatus"]:checked').value;
 
+
     addBookToLibrary(getTitle, getAuthor, getPage, readStatus);
     loopLibrary();
     e.preventDefault();
-})
+
+});
