@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+    <link rel="stylesheet" href="library.css">
+</head>
+
+<body>
+    <dialog>
+        <div class="popUpForm">
+            <form>
+                <div class="form-example">
+                    <label for="titleName">Title:</label>
+                    <input type="text" id="titleName" name="titleName" placeholder="Joe's Biography">
+                </div>
+
+                <div class="form-example">
+                    <label for="authorName">Author:</label>
+                    <input type="text" id="authorName" name="authorName" placeholder="John Doe">
+                </div>
+
+                <div class="form-example">
+                    <label for="numberAmount">Pages: </label>
+                    <input type="number" id="numberAmount" name="numberAmount" placeholder="460">
+                </div>
+
+                <p>Read Status: </p>
+                <div class="form-example">
+                    <label for="read">Read:</label>
+                    <input type="radio" id="read" name="readStatus" value="Read">
+                </div>
+
+                <div class="form-example">
+                    <label for="notRead">Not read: </label>
+                    <input type="radio" id="notRead" name="readStatus" value="Not Read">
+                </div>
+
+                <button id="submitButton" name="submit" value="submit">Submit</button>
+                <button id="closeButton" name="close" value="close" type="button">Close</button>
+            </form>
+        </div>
+    </dialog>
+    <div  id="library">
+        <div id="addbook">
+            <button autofocus>Add New Book</button>
+        </div>
+          
+        <div id="cardContainer">
+        
+        </div>
+        <!-- <div class="table">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Author</th>
+                        <th>Pages</th>
+                        <th>Read Status</th>
+                        <th>Id</th>
+                    </tr>
+                </thead>
+
+                <tbody id="tableLists">
+
+                </tbody>
+            </table>
+        </div> -->
+
+    </div>
+    <script src="library.js"></script>
+</body>
+
+</html>
