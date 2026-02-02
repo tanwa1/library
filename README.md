@@ -49,8 +49,3 @@ If you have Python installed:
 	- [Libary/library.js](Libary/library.js)
 	- [Libary/library.css](Libary/library.css)
 
-## What I’d Improve Next (optional)
-
-- Add basic form validation (required fields, pages > 0)
-- Persist data with `localStorage`
-- Improve accessibility (focus management when opening/closing the dialog)
